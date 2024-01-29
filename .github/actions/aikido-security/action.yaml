@@ -24,7 +24,7 @@ inputs:
     required: false
     default: "false"
   minimum-severity:
-    description: "Minimum severity to fail the workflow"
+    description: "Minimum severity to fail the workflow (LOW, MEDIUM, *HIGH, CRITICAL)"
     required: false
     default: "HIGH"
 
