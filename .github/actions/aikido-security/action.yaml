@@ -35,7 +35,7 @@ runs:
       uses: actions/checkout@v3
 
     - name: Detect new vulnerabilities
-      uses: AikidoSec/github-actions-workflow@v1.0.6
+      uses: AikidoSec/github-actions-workflow@v1.0.7
       with:
         secret-key: ${{ inputs.aikido-secret-key }}
         fail-on-timeout: ${{ inputs.fail-on-timeout }}
