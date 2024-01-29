@@ -46,4 +46,3 @@ runs:
         timeout-seconds: 180
         post-scan-status-comment: true
         github-token: ${{ inputs.github-token }}
-```
