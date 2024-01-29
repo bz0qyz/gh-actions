@@ -1,0 +1,49 @@
+name: Aikido Security
+description: "Run Aikido code scan"
+inputs:
+  github-token:
+    description: "GitHub token"
+    required: true
+  aikido-secret-key:
+    description: "Aikido secret key"
+    required: true
+  fail-on-timeout:
+    description: "Whether or not to fail the workflow if the scan times out"
+    required: false
+    default: "true"
+  fail-on-dependency-scan:
+    description: "Whether or not to fail the workflow if the dependency scan finds vulnerabilities"
+    required: false
+    default: "true"
+  fail-on-sast-scan:
+    description: "Whether or not to fail the workflow if the SAST scan finds vulnerabilities"
+    required: false
+    default: "true"
+  fail-on-iac-scan:
+    description: "Whether or not to fail the workflow if the IAC scan finds vulnerabilities"
+    required: false
+    default: "false"
+  minimum-severity:
+    description: "Minimum severity to fail the workflow"
+    required: false
+    default: "HIGH"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Detect new vulnerabilities
+      uses: AikidoSec/github-actions-workflow@v1.0.6
+      with:
+        secret-key: ${{ inputs.aikido-secret-key }}
+        fail-on-timeout: ${{ inputs.fail-on-timeout }}
+        fail-on-dependency-scan: ${{ inputs.fail-on-dependency-scan }}
+        fail-on-sast-scan: ${{ inputs.fail-on-sast-scan }}
+        fail-on-iac-scan: ${{ inputs.fail-on-iac-scan }}
+        minimum-severity: ${{ inputs.minimum-severity }}
+        timeout-seconds: 180
+        post-scan-status-comment: true
+        github-token: ${{ inputs.github-token }}
+```
